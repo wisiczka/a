@@ -20,20 +20,19 @@
 #include <curses.h>
 #include <time.h>
 #include "defines.h"
+#include "nouns.h"
 #include "inits.h"
 #include "map.h"
 #include "render.h"
 #include "parse.h"
 
 
+
 int main(int argc, char ** argv)
 {
   init();
 
-  player = &mob[0];
-  player->type = the_player;
-  player->y = 10;
-  player->x = 10;
+  init_nouns();
 
   init_map();
   bsp_split(0, 0, MAP_H, MAP_W, true);

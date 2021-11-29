@@ -44,11 +44,6 @@ void init()
   erase();
   refresh();
 
-  anml_glyph[the_player] = '@';
-  anml_glyph[anml_anteater] = 'a' | COLOR_PAIR(pair_brown);
-  anml_glyph[anml_alligator] = 'A' | COLOR_PAIR(pair_green);
-  anml_glyph[anml_boar] = 'b' | COLOR_PAIR(pair_black) | A_BOLD;
-  
 
   return;
 }

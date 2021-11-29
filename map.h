@@ -24,10 +24,7 @@ void init_map()
     }
   }
 
-  // Clear the mob list
-  for (i = 1; i < MAX_MOBS; i++)
-    mob[i].type = nobody;
-
+  
   // Fill the animals array; first two are reserved.
   animals[nobody] = nobody;
   animals[the_player] = nobody;

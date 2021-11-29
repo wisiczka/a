@@ -39,6 +39,7 @@ void stile(int y, int x, int tile);
 void tilefill(int t, int l, int b, int r, int tile);
 bool text_parse();
 void removeStringTrailingNewline(char *str);
+void init_nouns();
 
 // How much of the map we display at any time
 #define BOARD_W 90
@@ -73,6 +74,8 @@ void removeStringTrailingNewline(char *str);
 #define MAX_NOUNS 20
 #define MAX_CONVERSATIONS 20
 #define GOD_ID 9999
+// How many mobs (animals) the map can hold || will replace max_nouns
+#define MAX_MOBS 250
 
 
 
@@ -114,75 +117,7 @@ typedef enum
   pair_blue
 } pair_t;
 
-// Tile types; these are used on the map
-typedef enum
-{
-  tile_error,
-  tile_grass,
-  tile_path,
-  tile_sand,
-  tile_gravel,
-  tile_wall,
-  tile_fence,
-  tile_water,
-  tile_tree,
-  tile_rock,
-  tile_door_closed,
-  tile_door_open,
-  tile_toilet,
-  tile_sink
-} tile_t;
 
-// Animal types
-typedef enum
-{
-  nobody,
-  the_player,
-  anml_anteater,
-  anml_alligator,
-  anml_boar,
- 
-  anml_last // Size of array
-} animal_t;
-
-// Holds the character ORed with curses
-// attributes used to display each animal
-chtype anml_glyph[anml_last];
-
-// These are used during map generation
-// Each animal has a preferred terrain type
-typedef enum
-{
-  terr_grass,
-  terr_forest,
-  terr_savannah,
-  terr_arctic,
-  terr_pond
-} terrain_t;
-
-// animal_t with type "nobody" (0) are disabled
-typedef struct
-{
-  animal_t type;
-  int y;
-  int x;
-} mob_t;
-
-// How many mobs (animals) the map can hold
-#define MAX_MOBS 250
-
-mob_t mob[MAX_MOBS];
-
-// Shorthand for mob[0]
-mob_t * player;
-
-// Used during generation; this is the index of the next mob_t we can
-// use for placing animals. Index 0 is reserved for the player.
-int next_mob = 1;
-
-// Used during generation; these are the animals not yet placed on the
-// map. After one is used its slot will be set to "nobody".
-int animals[anml_last];
 
 // Where the player enters the map. Set in init_map(),
 // used in fill_area() and some other places.
@@ -197,16 +132,6 @@ int entrance;
 #define DW_E 1
 #define DW_S 2
 #define DW_W 3
-
-// Animal names
-char * anml_name[anml_last] =
-{
-  [anml_anteater] = "anteater",
-  [anml_alligator] = "alligator",
-  [anml_boar] = "boar",
-  
-};
-
 
 //  Ok, we're done with declarations; on to the code!
 
