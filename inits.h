@@ -17,7 +17,8 @@ void init()
   start_color();
 
   board = newwin(BOARD_H, BOARD_W, 0, 0);
-  disp  = newwin(DISP_H, DISP_W , BOARD_H, 0);
+  disp2  = newwin(DISP_H, DISP_W , BOARD_H, 0);
+  disp  = newwin(BOARD_H+DISP_H, COLS - BOARD_W - 1, 0, BOARD_W + 1);
 
 #ifdef WIN32
   key_left  = 260;
@@ -61,6 +62,7 @@ void shutdown()
   clear();
   delwin(board);
   delwin(disp);
+  delwin(disp2);
   endwin();
   exit(0);
 }

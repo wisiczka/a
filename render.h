@@ -119,6 +119,31 @@ void draw_map()
 /*
   Display names of the animals currently on screen.
 */
+void parsebox()
+{
+  int type;
+  int i;
+  int printed = 0;
+  int y;
+  int x;
+  bool seen;
+
+  werase(disp2);
+
+  wmove(disp2, 0, 0);
+  waddstr(disp2, "PARSEBOX");
+
+ 
+
+  wmove(disp2, DISP_H -1, 0);
+  waddstr(disp2, ">>>");
+
+  return;
+}
+
+
+
+
 void legend()
 {
   int type;
@@ -143,10 +168,10 @@ void legend()
     for (i = 1; i < MAX_MOBS; i++)
     {
       if (mob[i].type == nobody)
-	break; // No use proceeding
+  break; // No use proceeding
 
       if (mob[i].type != type)
-	continue;
+  continue;
 
       // This is the animal we are looking for
 
@@ -156,19 +181,19 @@ void legend()
       // Is it on the map and within FOV?
 
       if (y < 0 || y >= MAP_H ||
-	  x < 0 || x >= MAP_W ||
-	  (fov[y][x] & FOV_IN_VIEW) == 0)
+    x < 0 || x >= MAP_W ||
+    (fov[y][x] & FOV_IN_VIEW) == 0)
       {
-	continue;
+  continue;
       }
 
       // Is it on the screen? (Just being within FOV isn't enough)
       
       if (y - view_y >= 0 && y - view_y < BOARD_H &&
-	  x - view_x >= 0 && x - view_x < BOARD_W)
+    x - view_x >= 0 && x - view_x < BOARD_W)
       {
-	seen = true;
-	break;
+  seen = true;
+  break;
       }
     }
 
@@ -185,15 +210,42 @@ void legend()
       printed++;
 
       if (printed >= 20)
-	break; // We've run out of space (highly unlikely)
+  break; // We've run out of space (highly unlikely)
     }
   }
 
-  wmove(disp, DISP_H -1, 0);
-  waddstr(disp, "nyaaa");
+  wmove(disp, (BOARD_H+DISP_H) - 1, 0);
+  waddstr(disp, "cutee");
 
   return;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

@@ -23,6 +23,7 @@
 #include "inits.h"
 #include "map.h"
 #include "render.h"
+#include "parse.h"
 
 
 int main(int argc, char ** argv)
@@ -54,7 +55,7 @@ int main(int argc, char ** argv)
 */
 void play()
 {
-  int input;
+  
 
   while (1)
   {
@@ -62,47 +63,16 @@ void play()
 
     draw_map();
     legend();
+    parsebox();
 
     wnoutrefresh(board);
     wnoutrefresh(disp);
+    wnoutrefresh(disp2);
     doupdate();
 
-  new_input:
-    input = getch();
-    
-    if (input == key_left)
-    {
-      if (move_player(0, -1) == false)
-	goto new_input;
-    }
-    else if (input == key_right)
-    {
-      if (move_player(0, +1) == false)
-	goto new_input;
-    }
-    else if (input == key_up)
-    {
-      if (move_player(-1, 0) == false)
-	goto new_input;
-    }
-    else if (input == key_down)
-    {
-      if (move_player(+1, 0) == false)
-	goto new_input;
-    }
-    else if (input == '.' || input == ' ')
-    {
-      // Wait
-    }
-    else if (input == 'Q')
-    {
-      shutdown();
-    }
-    else
-    {
-      // Anything we don't recognize; no need to redraw the screen
-      goto new_input;
-    }
+    parse();
+
+ 
   }
 }
 
